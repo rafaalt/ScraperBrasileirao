@@ -29,10 +29,6 @@ class Scraper:
         timeVisitante = soup.find_all(class_='time-nome color-white')[1].text.strip()
         golsMandante = soup.find_all(class_='time-gols block')[0].text.strip()
         golsVisitante = soup.find_all(class_='time-gols block')[1].text.strip()
-        arbitros = soup.find_all(rel='noopener')[0].text.replace('\n', '').strip().split('(')
-        arbitro = arbitros[0].strip()
-        if len(arbitros) > 1:
-            arbitro += ' (FIFA)'
         estadio = soup.find_all(class_='text-2 p-r-20')[0].text.strip().split('-')[0]
         cidade = soup.find_all(class_='text-2 p-r-20')[0].text.strip().split('-')[1]
         estado = soup.find_all(class_='text-2 p-r-20')[0].text.strip().split('-')[2]
@@ -52,8 +48,6 @@ class Scraper:
             'timeVisitante': timeVisitante,
             'golsMandante': golsMandante,
             'golsVisitante': golsVisitante,
-            'arbitro': arbitro,
-            'arbitroVAR': '',
             'estadio': estadio,
             'cidade': cidade,
             'estado': estado,
@@ -77,8 +71,7 @@ class Scraper:
             ptsMandante = 1
         return ptsMandante, ptsVisitante
     
-#for ANO in range(2016,2018):
-ANO = 2015
+ANO = 2023
 SERIE = 'A'
 scrap = Scraper(str(ANO), SERIE)
 linkJogos = scrap.pegaLinkJogos()
